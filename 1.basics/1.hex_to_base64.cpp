@@ -1,6 +1,6 @@
 #define CATCH_CONFIG_MAIN
 
-#include "utils.h"
+#include "../utils/utils.h"
 #include <catch2/catch.hpp>
 
 std::string hex_to_base64( std::string_view hex )

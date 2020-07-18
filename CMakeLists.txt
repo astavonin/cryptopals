@@ -5,9 +5,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 17)
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-conan_basic_setup()
-
-find_package(Catch2 CONFIG REQUIRED)
+conan_basic_setup(TARGETS)
 
 find_program(clang_tidy NAMES clang-tidy PATHS /usr/local/opt/llvm/bin/)
 
@@ -24,17 +22,30 @@ message("CMAKE_CXX_COMPILER:\t${CMAKE_CXX_COMPILER}")
 message("CLANG-TIDY:\t\t${clang_tidy}")
 message("\n#####################################################\n")
 
+find_package(Catch2 CONFIG REQUIRED)
 
-add_executable(1.hex_to_base64 1.basics/1.hex_to_base64.cpp 1.basics/utils.cpp)
-target_link_libraries(1.hex_to_base64 PRIVATE Catch2::Catch2)
+add_library(utils STATIC utils/utils.cpp)
 
-add_executable(2.fixed_xor 1.basics/2.fixed_xor.cpp 1.basics/utils.cpp)
-target_link_libraries(2.fixed_xor PRIVATE Catch2::Catch2)
+set(DEFAULT_LIBS
+        CONAN_PKG::range-v3
+        Catch2::Catch2
+        utils)
+
+add_executable(1.hex_to_base64 1.basics/1.hex_to_base64.cpp)
+target_link_libraries(1.hex_to_base64 PRIVATE ${DEFAULT_LIBS})
+
+add_executable(2.fixed_xor 1.basics/2.fixed_xor.cpp)
+target_link_libraries(2.fixed_xor PRIVATE ${DEFAULT_LIBS})
+
+add_executable(3.single-byte_xor_cipher 1.basics/3.single-byte_xor_cipher.cpp)
+target_link_libraries(3.single-byte_xor_cipher PRIVATE ${DEFAULT_LIBS})
 
 if (clang_tidy)
     set_target_properties(
+            utils
             1.hex_to_base64
             2.fixed_xor
+            3.single-byte_xor_cipher
             PROPERTIES CXX_CLANG_TIDY ${clang_tidy}
     )
 endif (clang_tidy)

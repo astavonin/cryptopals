@@ -2,7 +2,7 @@
 #include <cassert>
 #include <charconv>
 
-std::vector<uint8_t> to_bin( std::string_view data )
+bin_vector to_bin( std::string_view data )
 {
     auto input_bytes  = data.size();
     auto output_bytes = input_bytes / 2;
@@ -23,7 +23,7 @@ std::vector<uint8_t> to_bin( std::string_view data )
     return res;
 }
 
-std::string to_hex( const std::vector<uint8_t> &data )
+std::string to_hex( const bin_vector &data )
 {
     std::string res( data.size() * 2, '\0' );
     auto        data_pos  = data.begin();
