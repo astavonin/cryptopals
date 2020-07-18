@@ -1,27 +1,7 @@
 #define CATCH_CONFIG_MAIN
 
+#include "utils.h"
 #include <catch2/catch.hpp>
-#include <charconv>
-
-std::vector<uint8_t> to_bin( std::string_view data )
-{
-    auto input_bytes = data.size();
-    assert( input_bytes % 2 == 0 );
-    std::vector<uint8_t> res;
-    res.reserve( input_bytes );
-
-    auto pos = data.begin();
-
-    uint8_t b;
-    for( size_t n = input_bytes / 2; n--; )
-    {
-        std::from_chars( pos, pos + 2, b, 16 );
-        res.push_back( b );
-        std::advance( pos, 2 );
-    }
-
-    return res;
-}
 
 std::string hex_to_base64( std::string_view hex )
 {
