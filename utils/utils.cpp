@@ -2,6 +2,9 @@
 #include <cassert>
 #include <charconv>
 
+namespace utils
+{
+
 bin_vector to_bin( std::string_view data )
 {
     auto input_bytes  = data.size();
@@ -44,3 +47,5 @@ std::string to_hex( const bin_vector &data )
 
     return res;
 }
+
+} // namespace utils

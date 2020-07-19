@@ -2,14 +2,14 @@
 
 #include <catch2/catch.hpp>
 
-#include "../utils/utils.h"
+#include "utils.h"
 
 std::string xor_hex( std::string_view a, std::string_view b )
 {
     assert( a.size() == b.size() );
 
-    std::vector<uint8_t> buf_a = to_bin( a );
-    std::vector<uint8_t> buf_b = to_bin( b );
+    std::vector<uint8_t> buf_a = utils::to_bin( a );
+    std::vector<uint8_t> buf_b = utils::to_bin( b );
     std::vector<uint8_t> buf_out( a.size() / 2, 0 );
 
     for( size_t n = 0; n < a.size(); n++ )
@@ -17,7 +17,7 @@ std::string xor_hex( std::string_view a, std::string_view b )
         buf_out[n] = buf_a[n] ^ buf_b[n];
     }
 
-    return to_hex( buf_out );
+    return utils::to_hex( buf_out );
 }
 
 TEST_CASE( "to_hex" )
@@ -25,7 +25,7 @@ TEST_CASE( "to_hex" )
     std::string_view     trg = "0049276d00";
     std::vector<uint8_t> src = { 0x00, 0x49, 0x27, 0x6d, 0x00 };
 
-    REQUIRE( to_hex( src ) == trg );
+    REQUIRE( utils::to_hex( src ) == trg );
 }
 
 TEST_CASE( "Fixed XOR" )

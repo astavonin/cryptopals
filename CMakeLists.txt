@@ -24,7 +24,9 @@ message("\n#####################################################\n")
 
 find_package(Catch2 CONFIG REQUIRED)
 
-add_library(utils STATIC utils/utils.cpp)
+add_library(utils STATIC utils/utils.cpp utils/utils.h)
+target_include_directories(utils INTERFACE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/utils>)
 
 set(DEFAULT_LIBS
         CONAN_PKG::range-v3
@@ -37,8 +39,12 @@ target_link_libraries(1.hex_to_base64 PRIVATE ${DEFAULT_LIBS})
 add_executable(2.fixed_xor 1.basics/2.fixed_xor.cpp)
 target_link_libraries(2.fixed_xor PRIVATE ${DEFAULT_LIBS})
 
-add_executable(3.single-byte_xor_cipher 1.basics/3.single-byte_xor_cipher.cpp)
+add_executable(3.single-byte_xor_cipher 1.basics/3.single-byte_xor_cipher.cpp 1.basics/byte_xor.cpp)
 target_link_libraries(3.single-byte_xor_cipher PRIVATE ${DEFAULT_LIBS})
+
+add_executable(4.single-byte_xor_detect 1.basics/4.single-byte_xor_detect.cpp 1.basics/byte_xor.cpp)
+target_link_libraries(4.single-byte_xor_detect PRIVATE ${DEFAULT_LIBS})
+file(COPY 1.basics/4.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 if (clang_tidy)
     set_target_properties(

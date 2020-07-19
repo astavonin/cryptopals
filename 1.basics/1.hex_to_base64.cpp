@@ -1,6 +1,6 @@
 #define CATCH_CONFIG_MAIN
 
-#include "../utils/utils.h"
+#include "utils.h"
 #include <catch2/catch.hpp>
 
 std::string hex_to_base64( std::string_view hex )
@@ -10,7 +10,7 @@ std::string hex_to_base64( std::string_view hex )
     size_t      input_bytes = hex.size() / 2;
     std::string res( input_bytes / 3 * 4, '\0' );
     auto        pos_out = res.data();
-    auto        bin     = to_bin( hex );
+    auto        bin     = utils::to_bin( hex );
     auto        pos_in  = bin.begin();
 
     for( size_t n = input_bytes / 3; n--; )
@@ -51,7 +51,7 @@ TEST_CASE( "to_bin check" )
     std::string_view     src = "49276d00";
     std::vector<uint8_t> trg = { 0x49, 0x27, 0x6d, 0x00 };
 
-    REQUIRE( to_bin( src ) == trg );
+    REQUIRE( utils::to_bin( src ) == trg );
 }
 
 TEST_CASE( "Convert hex to base64" )
