@@ -5,11 +5,14 @@
 #ifndef CRYPTOPALS_BYTE_XOR_H
 #define CRYPTOPALS_BYTE_XOR_H
 
+#include <ostream>
 #include <string>
 #include <tuple>
 #include <utils.h>
 
 using var_record = std::tuple<float, char, std::string>;
+
+std::ostream &operator<<( std::ostream &os, const var_record &rec );
 
 std::string             xor_with( const utils::bin_vector &data, uint8_t ch );
 std::vector<var_record> gen_variants( const std::vector<unsigned char> &data,

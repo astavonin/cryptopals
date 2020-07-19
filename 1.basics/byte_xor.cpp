@@ -94,3 +94,10 @@ std::vector<var_record> gen_variants( const std::vector<unsigned char> &data,
     return std::vector<var_record>( decoding_res.begin(),
                                     decoding_res.begin() + real_limit );
 }
+
+std::ostream &operator<<( std::ostream &os, const var_record &rec )
+{
+    os << "Chi-squared: " << std::get<0>( rec )
+       << ", key: " << std::get<1>( rec ) << " : " << std::get<2>( rec );
+    return os;
+}

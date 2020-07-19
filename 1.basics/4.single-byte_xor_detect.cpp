@@ -29,9 +29,7 @@ int main()
     {
         for( const auto &rec : line )
         {
-            std::cout << "Chi-squared: " << std::get<0>( rec )
-                      << ", key: " << std::get<1>( rec ) << " : "
-                      << std::get<2>( rec ) << std::endl;
+            std::cout << rec << std::endl;
         }
     }
 
