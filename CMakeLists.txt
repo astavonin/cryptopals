@@ -28,6 +28,7 @@ message("CLANG-TIDY:\t\t${clang_tidy}")
 message("\n#####################################################\n")
 
 find_package(Catch2 CONFIG REQUIRED)
+#find_package(fmt CONFIG REQUIRED)
 
 add_library(utils STATIC utils/utils.cpp utils/utils.h)
 target_include_directories(utils INTERFACE
@@ -36,6 +37,7 @@ target_include_directories(utils INTERFACE
 set(DEFAULT_LIBS
         CONAN_PKG::range-v3
         Catch2::Catch2
+        CONAN_PKG::fmt
         utils)
 
 add_executable(1.hex_to_base64 1.basics/1.hex_to_base64.cpp)
@@ -50,6 +52,9 @@ target_link_libraries(3.single-byte_xor_cipher PRIVATE ${DEFAULT_LIBS})
 add_executable(4.single-byte_xor_detect 1.basics/4.single-byte_xor_detect.cpp 1.basics/byte_xor.cpp)
 target_link_libraries(4.single-byte_xor_detect PRIVATE ${DEFAULT_LIBS})
 file(COPY 1.basics/4.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
+add_executable(5.repeating-key_xor 1.basics/5.repeating-key_xor.cpp)
+target_link_libraries(5.repeating-key_xor PRIVATE ${DEFAULT_LIBS})
 
 if (clang_tidy)
     set_target_properties(

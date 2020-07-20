@@ -10,3 +10,4 @@ AlwaysBreakTemplateDeclarations : Yes
 Standard : c++17
 BreakConstructorInitializersBeforeComma : true
 BreakBeforeBraces : Allman
+ColumnLimit: 100
