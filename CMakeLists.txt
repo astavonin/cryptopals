@@ -56,6 +56,10 @@ file(COPY 1.basics/4.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 add_executable(5.repeating-key_xor 1.basics/5.repeating-key_xor.cpp)
 target_link_libraries(5.repeating-key_xor PRIVATE ${DEFAULT_LIBS})
 
+add_executable(6.repeating-key_xor_break 1.basics/6.repeating-key_xor_break.cpp)
+target_link_libraries(6.repeating-key_xor_break PRIVATE ${DEFAULT_LIBS})
+file(COPY 1.basics/6.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
 if (clang_tidy)
     set_target_properties(
             utils
