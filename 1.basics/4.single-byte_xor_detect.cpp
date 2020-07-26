@@ -12,25 +12,22 @@ int main()
     {
         return -1;
     }
-    std::string                          buf;
-    std::vector<std::vector<var_record>> all_lines;
+    std::string             buf;
+    std::vector<var_record> all_lines;
 
     while( std::getline( f, buf ) )
     {
         auto data         = utils::to_bin( buf );
-        auto decoding_res = gen_variants( data );
-        if( !decoding_res.empty() )
+        auto decoding_res = gen_variant( data );
+        if( decoding_res )
         {
-            all_lines.emplace_back( decoding_res );
+            all_lines.emplace_back( *decoding_res );
         }
     }
 
-    for( const auto &line : all_lines )
+    for( const auto &rec : all_lines )
     {
-        for( const auto &rec : line )
-        {
-            std::cout << rec << std::endl;
-        }
+        std::cout << rec << std::endl;
     }
 
     return 0;

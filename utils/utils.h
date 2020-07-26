@@ -8,7 +8,7 @@
 namespace utils
 {
 
-using bin_vector = std::vector<uint8_t>;
+using bin_vector = std::vector<char>;
 
 bin_vector  to_bin( std::string_view data );
 std::string to_hex( const bin_vector &data );

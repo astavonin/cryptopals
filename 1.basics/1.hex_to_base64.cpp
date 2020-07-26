@@ -48,8 +48,8 @@ std::string hex_to_base64( std::string_view hex )
 
 TEST_CASE( "to_bin check" )
 {
-    std::string_view     src = "49276d00";
-    std::vector<uint8_t> trg = { 0x49, 0x27, 0x6d, 0x00 };
+    std::string_view  src = "49276d00";
+    std::vector<char> trg = { 0x49, 0x27, 0x6d, 0x00 };
 
     REQUIRE( utils::to_bin( src ) == trg );
 }

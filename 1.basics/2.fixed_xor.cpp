@@ -8,9 +8,9 @@ std::string xor_hex( std::string_view a, std::string_view b )
 {
     assert( a.size() == b.size() );
 
-    std::vector<uint8_t> buf_a = utils::to_bin( a );
-    std::vector<uint8_t> buf_b = utils::to_bin( b );
-    std::vector<uint8_t> buf_out( a.size() / 2, 0 );
+    std::vector<char> buf_a = utils::to_bin( a );
+    std::vector<char> buf_b = utils::to_bin( b );
+    std::vector<char> buf_out( a.size() / 2, 0 );
 
     for( size_t n = 0; n < a.size(); n++ )
     {
@@ -22,8 +22,8 @@ std::string xor_hex( std::string_view a, std::string_view b )
 
 TEST_CASE( "to_hex" )
 {
-    std::string_view     trg = "0049276d00";
-    std::vector<uint8_t> src = { 0x00, 0x49, 0x27, 0x6d, 0x00 };
+    std::string_view  trg = "0049276d00";
+    std::vector<char> src = { 0x00, 0x49, 0x27, 0x6d, 0x00 };
 
     REQUIRE( utils::to_hex( src ) == trg );
 }
