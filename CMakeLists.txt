@@ -70,8 +70,12 @@ add_executable(7.aes_in_ecb 1.basics/7.aes_in_ecb.cpp)
 target_link_libraries(7.aes_in_ecb PRIVATE ${DEFAULT_LIBS} CONAN_PKG::cryptopp)
 file(COPY 1.basics/7.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
-add_executable(7.1.cryptopp_ecb 1.basics/7.cryptopp_ecb.cpp)
-target_link_libraries(7.1.cryptopp_ecb PRIVATE ${DEFAULT_LIBS} CONAN_PKG::cryptopp)
+add_executable(7.cryptopp_ecb 1.basics/7.cryptopp_ecb.cpp)
+target_link_libraries(7.cryptopp_ecb PRIVATE ${DEFAULT_LIBS} CONAN_PKG::cryptopp)
+
+add_executable(8.detect_aes_in_ecb 1.basics/8.detect_aes_in_ecb.cpp)
+target_link_libraries(8.detect_aes_in_ecb PRIVATE ${DEFAULT_LIBS} CONAN_PKG::cryptopp)
+file(COPY 1.basics/8.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 
 if (clang_tidy)

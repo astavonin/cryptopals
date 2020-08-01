@@ -15,7 +15,7 @@ bin_vector to_bin( std::string_view data )
 
     auto pos = data.begin();
 
-    char b;
+    uint8_t b;
     for( size_t n = output_bytes; n--; )
     {
         auto [_, ec] = std::from_chars( pos, pos + 2, b, 16 );
